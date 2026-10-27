@@ -5,111 +5,391 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Nodio Technologies</title>
+    <meta name="description" content="Nodio Technologies builds custom software for startups and large companies, keeps it secure and running, and makes its own products like DATO." />
+    <meta name="theme-color" content="#0C0812" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#0C0812',
+                        surface: '#160F1F',
+                        line: '#2D2340',
+                        paper: '#F8F8F6',
+                        muted: '#A99FB8',
+                        gold: '#DDA86D',
+                        neon: '#FF3EA5',
+                    },
+                    fontFamily: {
+                        display: ['"Rubik Mono One"', 'monospace'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
     <style>
-        html,
-        body {
-            font-family: 'Rubik Mono One', monospace;
-            background-color: #fafaf9;
-            /* offwhite */
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            overflow: hidden;
+        html {
+            scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
         }
 
-        button:focus,
-        a:focus {
-            outline: 2px solid #000000;
-            outline-offset: 2px;
-            border-radius: 3px;
+        ::selection {
+            background: #FF3EA5;
+            color: #0C0812;
+        }
+
+        /* Same bar/gap rhythm as the logo (30 / 16). Period is line-height / 7 so every line is cut the same way. */
+        .slat-text {
+            line-height: 1.1 !important;
+            -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 0.102em, transparent 0.102em 0.157em);
+            mask-image: repeating-linear-gradient(to bottom, #000 0 0.102em, transparent 0.102em 0.157em);
+        }
+
+        .logo-fill {
+            background-image: linear-gradient(to bottom, #F8F8F6 0 64%, #FF3EA5 64%);
+            background-size: 100% 1.1em;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .btn-neon {
+            box-shadow: 0 0 24px rgba(255, 62, 165, 0.45);
+        }
+
+        /* Sets behind the bars: its horizon is the top edge of the first bar. */
+        .sky {
+            --sun: min(640px, 92vw);
+            position: absolute;
+            z-index: -1;
+            bottom: 100%;
+            left: 50%;
+            translate: -50% 0;
+            height: calc(var(--sun) * 0.58);
+            opacity: 0.2;
+            clip-path: inset(-200px -200px 0 -200px);
+            pointer-events: none;
+        }
+
+        .sun-glow {
+            filter: drop-shadow(0 0 40px rgba(255, 62, 165, 0.6));
+        }
+
+        .sun {
+            width: var(--sun);
+            height: var(--sun);
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #FFE3A3 0%, #DDA86D 28%, #FF3EA5 58%);
+            -webkit-mask-image: linear-gradient(to bottom, #000 0 30%, transparent 30% 32%, #000 32% 38%, transparent 38% 41%, #000 41% 46%, transparent 46% 50%, #000 50% 54%, transparent 54% 59%, #000 59%);
+            mask-image: linear-gradient(to bottom, #000 0 30%, transparent 30% 32%, #000 32% 38%, transparent 38% 41%, #000 41% 46%, transparent 46% 50%, #000 50% 54%, transparent 54% 59%, #000 59%);
+        }
+
+        .slat {
+            scroll-margin-top: 1.5rem;
+        }
+
+        .slat>summary {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.1rem 1.25rem;
+            border-radius: 1rem;
+            color: #0C0812;
+            cursor: pointer;
+            list-style: none;
+            transition: transform 0.2s;
+            animation: slide-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+            animation-delay: calc(var(--i) * 80ms);
+        }
+
+        .slat>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .slat>summary:hover {
+            transform: translateX(10px);
+        }
+
+        @media (min-width: 768px) {
+            .slat>summary {
+                padding: 1.4rem 2rem;
+                gap: 1.5rem;
+            }
+        }
+
+        .slat-label {
+            flex: 1;
+            min-width: 0;
+            font-family: 'Rubik Mono One', monospace;
+            font-size: clamp(1rem, 3.4vw, 2.5rem);
+            line-height: 1.1;
+        }
+
+        .slat-toggle {
+            font-size: 1.75rem;
+            line-height: 1;
+            transition: transform 0.2s;
+        }
+
+        .slat[open] .slat-toggle {
+            transform: rotate(45deg);
+        }
+
+        .slat[open]>.slat-panel {
+            animation: panel-in 0.35s ease both;
+        }
+
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateX(-48px);
+            }
+        }
+
+        @keyframes panel-in {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .slat>summary,
+            .slat[open]>.slat-panel {
+                animation: none;
+            }
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        summary:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid #FF3EA5;
+            outline-offset: 3px;
         }
     </style>
-    <script>
-        function showModal(modalId) {
-            document.getElementById(modalId).classList.remove('hidden');
-        }
-
-        function hideModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
-        }
-
-        // if user presses escape, hide all modals
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') {
-                hideModal('why');
-                hideModal('how');
-                hideModal('what');
-                hideModal('contact');
-            }
-        });
-    </script>
 </head>
 
-<body>
-    <div class="max-w-3xl mx-auto px-6 flex flex-col h-[100dvh]">
-        <div class="flex-1 flex flex-col justify-center">
-            <div class="py-6 text-center">
-                <div class="text-xs font-bold tracking-widest">we are</div>
-                <div class="text-xl sm:text-2xl font-bold tracking-widest">NODIO TECHNOLOGIES</div>
-            </div>
-            <div class="mt-10 text-center">
-                <h1 class="text-4xl sm:text-6xl md:text-7xl leading-tight max-w-4xl mx-auto text-black">
-                    We build<br /> the future<br /> of business software
-                </h1>
-            </div>
+<body class="bg-ink text-paper font-sans">
+    <header class="max-w-6xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16">
+        <img src="/nodio-tech.svg" alt="Nodio Technologies" class="w-full h-auto" />
+        <div class="mt-12 sm:mt-16 grid gap-8 lg:grid-cols-2 lg:items-end">
+            <h1 class="slat-text logo-fill font-display text-3xl sm:text-5xl">We build it.<br />We keep it<br />running.</h1>
+            <p class="text-lg text-muted leading-relaxed">
+                Launch day is where our work starts. Software flaws are now the top way attackers break in, behind 31%
+                of breaches, and only 26% of critical ones were fully fixed in 2025
+                (<a href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" rel="noopener" class="text-paper underline decoration-neon underline-offset-4 hover:text-neon">Verizon DBIR 2026</a>).
+                So we stay after delivery, keeping what we build patched, updated and running.
+            </p>
         </div>
-        <div class="mx-auto max-w-xl my-8">
-            <div class="flex justify-between space-x-8 sm:space-x-12 items-center text-sm font-semibold">
-                <button onclick="showModal('why')" class="text-teal-950 hover:text-teal-800">Why</button>
-                <button onclick="showModal('how')" class="text-teal-950 hover:text-teal-800">How</button>
-                <button onclick="showModal('what')" class="text-teal-950 hover:text-teal-800">What</button>
-                <button onclick="showModal('contact')" class="border border-teal-950 text-teal-950 hover:text-teal-800 rounded-full px-4 py-1 transition">CONTACT</button>
-            </div>
-        </div>
+    </header>
 
-        <div id="why" class="hidden fixed inset-0 bg-white z-50 flex items-center justify-center">
-            <div class="flex flex-col items-center justify-center mt-20">
-                <p class="text-2xl md:text-3xl font-bold text-center max-w-3xl px-6">
-                    Because every business deserves software that sparks growth, not friction.
-                </p>
-                <button onclick="hideModal('why')" class="text-4xl font-bold text-teal-950 hover:text-teal-800 mt-12">×</button>
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
+        <div class="relative mt-8 grid gap-3 sm:gap-5">
+            <div class="sky" aria-hidden="true">
+                <div class="sun-glow">
+                    <div class="sun"></div>
+                </div>
+            </div>
+            <details class="slat" name="slats" id="why" style="--i: 0">
+                <summary class="bg-paper">
+                    <span class="font-display text-xs opacity-60">01</span>
+                    <span class="slat-label">Why</span>
+                    <span class="hidden md:block text-sm font-medium opacity-70">The reason</span>
+                    <span class="slat-toggle" aria-hidden="true">+</span>
+                </summary>
+                <div class="slat-panel mt-3 rounded-2xl border border-line bg-surface p-6 sm:p-10">
+                    <p class="max-w-3xl text-2xl sm:text-4xl font-semibold leading-snug">
+                        Because every business deserves software that sparks growth, not friction.
+                    </p>
+                </div>
+            </details>
+
+            <details class="slat" name="slats" id="how" style="--i: 1">
+                <summary class="bg-paper">
+                    <span class="font-display text-xs opacity-60">02</span>
+                    <span class="slat-label">How</span>
+                    <span class="hidden md:block text-sm font-medium opacity-70">The approach</span>
+                    <span class="slat-toggle" aria-hidden="true">+</span>
+                </summary>
+                <div class="slat-panel mt-3 rounded-2xl border border-line bg-surface p-6 sm:p-10">
+                    <p class="max-w-3xl text-2xl sm:text-4xl font-semibold leading-snug">
+                        By building sleek, custom tools that fit like a glove&mdash;simple, sharp, unstoppable.
+                    </p>
+                </div>
+            </details>
+
+            <details class="slat" name="slats" id="what" style="--i: 2">
+                <summary class="bg-paper">
+                    <span class="font-display text-xs opacity-60">03</span>
+                    <span class="slat-label">What</span>
+                    <span class="hidden md:block text-sm font-medium opacity-70">Custom software &middot; per project</span>
+                    <span class="slat-toggle" aria-hidden="true">+</span>
+                </summary>
+                <div class="slat-panel mt-3 rounded-2xl border border-line bg-surface p-6 sm:p-10">
+                    <p class="max-w-3xl text-2xl sm:text-4xl font-semibold leading-snug">
+                        We build bespoke ERP, CRM, CMS, what-ever-you-name-it to enable your business navigate the new world..
+                    </p>
+                    <p class="mt-6 max-w-3xl text-muted leading-relaxed">
+                        For startups and large companies. We design, build and ship web apps, internal tools, ERP and
+                        CRM systems, and the integrations that connect the tools you already use.
+                    </p>
+                    <ul class="mt-6 flex flex-wrap gap-2 text-sm">
+                        <li class="rounded-full border border-line px-3 py-1">Web apps</li>
+                        <li class="rounded-full border border-line px-3 py-1">ERP</li>
+                        <li class="rounded-full border border-line px-3 py-1">CRM</li>
+                        <li class="rounded-full border border-line px-3 py-1">CMS</li>
+                        <li class="rounded-full border border-line px-3 py-1">Integrations</li>
+                        <li class="rounded-full border border-line px-3 py-1">Internal tools</li>
+                    </ul>
+                    <a href="#hello" data-topic="A new project" class="btn-neon mt-8 inline-block rounded-full bg-neon text-ink px-6 py-3 font-semibold hover:bg-paper transition">Start a project</a>
+                </div>
+            </details>
+
+            <details class="slat" name="slats" id="care" style="--i: 3">
+                <summary class="bg-paper">
+                    <span class="font-display text-xs opacity-60">04</span>
+                    <span class="slat-label">Care plans</span>
+                    <span class="hidden md:block text-sm font-medium opacity-70">Maintenance &amp; security</span>
+                    <span class="slat-toggle" aria-hidden="true">+</span>
+                </summary>
+                <div class="slat-panel mt-3 rounded-2xl border border-line bg-surface p-6 sm:p-10">
+                    <p class="max-w-3xl text-xl sm:text-2xl leading-relaxed">
+                        Long-term maintenance and security for the websites and systems we build. One monthly plan.
+                        We keep your site updated, patched and online, so you can focus on your business.
+                    </p>
+                    <ul class="mt-6 flex flex-wrap gap-2 text-sm">
+                        <li class="rounded-full border border-line px-3 py-1">Maintenance</li>
+                        <li class="rounded-full border border-line px-3 py-1">Security</li>
+                        <li class="rounded-full border border-line px-3 py-1">Updates</li>
+                        <li class="rounded-full border border-line px-3 py-1">Support</li>
+                    </ul>
+                    <a href="#hello" data-topic="A care plan" class="btn-neon mt-8 inline-block rounded-full bg-neon text-ink px-6 py-3 font-semibold hover:bg-paper transition">Ask about a care plan</a>
+                </div>
+            </details>
+
+            <details class="slat" name="slats" id="dato" style="--i: 4">
+                <summary class="bg-gold">
+                    <span class="font-display text-xs opacity-60">05</span>
+                    <span class="slat-label">DATO</span>
+                    <span class="hidden md:block text-sm font-medium opacity-70">Our product &middot; dato.software</span>
+                    <span class="slat-toggle" aria-hidden="true">+</span>
+                </summary>
+                <div class="slat-panel mt-3 rounded-2xl border border-gold/40 bg-surface p-6 sm:p-10 grid gap-10 lg:grid-cols-2">
+                    <div>
+                        <img src="/dato.svg" alt="DATO" class="h-10 sm:h-14 w-auto" />
+                        <p class="mt-8 text-xl sm:text-2xl font-semibold leading-snug">Customer operations under control. More time to run your business.</p>
+                        <p class="mt-4 text-muted leading-relaxed">
+                            DATO is a business platform for service businesses. Appointments, clients, invoicing,
+                            payments, inventory and reports live in one place, set up around how your business already
+                            works. Sold as a subscription.
+                        </p>
+                        <div class="mt-8 flex flex-wrap gap-4">
+                            <a href="https://dato.software" target="_blank" rel="noopener" class="rounded-full bg-gold text-ink px-6 py-3 font-semibold hover:bg-paper transition shadow-[0_0_24px_rgba(221,168,109,0.45)]">Visit dato.software <span aria-hidden="true">&nearr;</span></a>
+                            <a href="#hello" data-topic="DATO" class="rounded-full border border-line px-6 py-3 font-semibold hover:border-gold transition">Ask about DATO</a>
+                        </div>
+                    </div>
+                    <div>
+                        <ul class="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+                            <li class="flex gap-3"><span class="mt-2 h-1.5 w-4 rounded-sm bg-gold shrink-0"></span>Appointments and scheduling</li>
+                            <li class="flex gap-3"><span class="mt-2 h-1.5 w-4 rounded-sm bg-gold shrink-0"></span>Clients and full history</li>
+                            <li class="flex gap-3"><span class="mt-2 h-1.5 w-4 rounded-sm bg-gold shrink-0"></span>Invoicing with AADE myDATA</li>
+                            <li class="flex gap-3"><span class="mt-2 h-1.5 w-4 rounded-sm bg-gold shrink-0"></span>Online payments</li>
+                            <li class="flex gap-3"><span class="mt-2 h-1.5 w-4 rounded-sm bg-gold shrink-0"></span>Orders and inventory</li>
+                            <li class="flex gap-3"><span class="mt-2 h-1.5 w-4 rounded-sm bg-gold shrink-0"></span>Reports and automations</li>
+                        </ul>
+                        <p class="mt-8 text-sm text-muted">Ready for auto repair, physiotherapy, rentals, manufacturing and e-shops.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details class="slat" name="slats" id="hello" style="--i: 5">
+                <summary class="bg-paper">
+                    <span class="font-display text-xs opacity-60">06</span>
+                    <span class="slat-label">Say hello</span>
+                    <span class="hidden md:block text-sm font-medium opacity-70">hi@nodio.tech</span>
+                    <span class="slat-toggle" aria-hidden="true">+</span>
+                </summary>
+                <div class="slat-panel mt-3 rounded-2xl border border-line bg-surface p-6 sm:p-10 grid gap-10 lg:grid-cols-2">
+                    <div>
+                        <p class="text-xl sm:text-2xl leading-relaxed">
+                            Tell us about your project, your website or your business. We read every message.
+                        </p>
+                        <a href="mailto:hi@nodio.tech" class="mt-6 inline-block text-2xl font-semibold text-neon hover:text-paper">hi@nodio.tech</a>
+                    </div>
+                    <form id="contact-form" class="grid gap-5">
+                        <div class="grid gap-5 sm:grid-cols-2">
+                            <label class="grid gap-2 text-sm">
+                                Name
+                                <input name="name" required autocomplete="name" class="rounded-lg border-line bg-ink text-paper focus:border-neon focus:ring-0" />
+                            </label>
+                            <label class="grid gap-2 text-sm">
+                                Company <span class="sr-only">(optional)</span>
+                                <input name="company" autocomplete="organization" placeholder="Optional" class="rounded-lg border-line bg-ink text-paper placeholder:text-muted/60 focus:border-neon focus:ring-0" />
+                            </label>
+                        </div>
+                        <label class="grid gap-2 text-sm">
+                            What is it about?
+                            <select name="topic" class="rounded-lg border-line bg-ink text-paper focus:border-neon focus:ring-0">
+                                <option>A new project</option>
+                                <option>A care plan</option>
+                                <option>DATO</option>
+                                <option>Something else</option>
+                            </select>
+                        </label>
+                        <label class="grid gap-2 text-sm">
+                            Message
+                            <textarea name="message" rows="5" required class="rounded-lg border-line bg-ink text-paper focus:border-neon focus:ring-0"></textarea>
+                        </label>
+                        <div class="flex flex-wrap items-center gap-4">
+                            <button type="submit" class="btn-neon rounded-full bg-neon text-ink px-6 py-3 font-semibold hover:bg-paper transition">Send message</button>
+                            <p class="text-sm text-muted">Opens your email app.</p>
+                        </div>
+                    </form>
+                </div>
+            </details>
+        </div>
+    </main>
+
+    <footer class="border-t border-line">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between text-sm text-muted">
+            <p>&copy; <span id="year">2026</span> Nodio Technologies</p>
+            <div class="flex gap-6">
+                <a href="mailto:hi@nodio.tech" class="hover:text-neon">hi@nodio.tech</a>
+                <a href="https://dato.software" target="_blank" rel="noopener" class="hover:text-neon">dato.software</a>
             </div>
         </div>
-        <div id="how" class="hidden fixed inset-0 bg-white z-50 flex items-center justify-center">
-            <div class="flex flex-col items-center justify-center mt-20">
-                <p class="text-2xl md:text-3xl font-bold text-center max-w-3xl px-6">
-                    By building sleek, custom tools that fit like a glove—simple, sharp, unstoppable.
-                </p>
-                <button onclick="hideModal('how')" class="text-4xl font-bold text-teal-950 hover:text-teal-800 mt-12">×</button>
-            </div>
-        </div>
-        <div id="what" class="hidden fixed inset-0 bg-white z-50 flex items-center justify-center">
-            <div class="flex flex-col items-center justify-center mt-20">
-                <p class="text-2xl md:text-3xl font-bold text-center max-w-3xl px-6">
-                    We build tailor-made ERP, CRM,  and bespoke systems that make your business future-ready.
-                </p>
-                <button onclick="hideModal('what')" class="text-4xl font-bold text-teal-950 hover:text-teal-800 mt-12">×</button>
-            </div>
-        </div>
-        <div id="contact" class="hidden fixed inset-0 bg-white z-50 flex items-center justify-center">
-            <div class="flex flex-col items-center justify-center mt-20">
-                <p class="text-2xl md:text-3xl font-bold text-center max-w-3xl px-6">
-                    YOU CAN REACH US AT <a href="mailto:hi@nodio.tech" class="text-teal-700 hover:text-teal-600">hi@nodio.tech</a>
-                </p>
-                <button onclick="hideModal('contact')" class="text-4xl font-bold text-teal-950 hover:text-teal-800 mt-12">×</button>
-            </div>
-        </div>
-    </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        document.querySelectorAll('[data-topic]').forEach((link) => {
+            link.addEventListener('click', () => {
+                document.querySelector('#contact-form [name="topic"]').value = link.dataset.topic;
+                document.getElementById('hello').open = true;
+            });
+        });
+
+        document.getElementById('contact-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const data = new FormData(event.target);
+            const from = data.get('company') ? `${data.get('name')} (${data.get('company')})` : data.get('name');
+            const subject = `${data.get('topic')} - ${from}`;
+            window.location.href = `mailto:hi@nodio.tech?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(data.get('message'))}`;
+        });
+    </script>
 </body>
 
 </html>

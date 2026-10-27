@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 306" role="img" aria-label="DATO scanline logo" width="1460" height="306">
+  <g>
+    <g fill="#F8F8F6">
+      <rect x="0" y="0" width="275" height="30" rx="6" ry="6"/>
+      <rect x="0" y="46" width="320" height="30" rx="6" ry="6"/>
+      <rect x="0" y="92" width="105" height="30" rx="6" ry="6"/>
+      <rect x="215" y="92" width="105" height="30" rx="6" ry="6"/>
+      <rect x="0" y="138" width="105" height="30" rx="6" ry="6"/>
+      <rect x="215" y="138" width="105" height="30" rx="6" ry="6"/>
+      <rect x="0" y="184" width="105" height="30" rx="6" ry="6"/>
+      <rect x="215" y="184" width="105" height="30" rx="6" ry="6"/>
+    </g>
+    <g fill="#DDA86D">
+      <rect x="0" y="230" width="320" height="30" rx="6" ry="6"/>
+      <rect x="0" y="276" width="275" height="30" rx="6" ry="6"/>
+    </g>
+    <g transform="translate(380)">
+      <g fill="#F8F8F6">
+        <rect x="78" y="0" width="170" height="30" rx="6" ry="6"/>
+        <rect x="30" y="46" width="266" height="30" rx="6" ry="6"/>
+        <rect x="0" y="92" width="104" height="30" rx="6" ry="6"/>
+        <rect x="216" y="92" width="104" height="30" rx="6" ry="6"/>
+        <rect x="0" y="138" width="320" height="30" rx="6" ry="6"/>
+        <rect x="0" y="184" width="320" height="30" rx="6" ry="6"/>
+      </g>
+      <g fill="#DDA86D">
+        <rect x="0" y="230" width="104" height="30" rx="6" ry="6"/>
+        <rect x="216" y="230" width="104" height="30" rx="6" ry="6"/>
+        <rect x="0" y="276" width="104" height="30" rx="6" ry="6"/>
+        <rect x="216" y="276" width="104" height="30" rx="6" ry="6"/>
+      </g>
+    </g>
+    <g transform="translate(760)">
+      <g fill="#F8F8F6">
+        <rect x="0" y="0" width="320" height="30" rx="6" ry="6"/>
+        <rect x="0" y="46" width="320" height="30" rx="6" ry="6"/>
+        <rect x="106" y="92" width="108" height="30" rx="6" ry="6"/>
+        <rect x="106" y="138" width="108" height="30" rx="6" ry="6"/>
+        <rect x="106" y="184" width="108" height="30" rx="6" ry="6"/>
+      </g>
+      <g fill="#DDA86D">
+        <rect x="106" y="230" width="108" height="30" rx="6" ry="6"/>
+        <rect x="106" y="276" width="108" height="30" rx="6" ry="6"/>
+      </g>
+    </g>
+    <g transform="translate(1140)">
+      <g fill="#F8F8F6">
+        <rect x="50" y="0" width="220" height="30" rx="6" ry="6"/>
+        <rect x="0" y="46" width="320" height="30" rx="6" ry="6"/>
+        <rect x="0" y="92" width="104" height="30" rx="6" ry="6"/>
+        <rect x="216" y="92" width="104" height="30" rx="6" ry="6"/>
+        <rect x="0" y="138" width="104" height="30" rx="6" ry="6"/>
+        <rect x="216" y="138" width="104" height="30" rx="6" ry="6"/>
+        <rect x="0" y="184" width="104" height="30" rx="6" ry="6"/>
+        <rect x="216" y="184" width="104" height="30" rx="6" ry="6"/>
+      </g>
+      <g fill="#DDA86D">
+        <rect x="0" y="230" width="320" height="30" rx="6" ry="6"/>
+        <rect x="50" y="276" width="220" height="30" rx="6" ry="6"/>
+      </g>
+    </g>
+  </g>
+</svg>
