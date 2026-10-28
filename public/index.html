@@ -105,7 +105,6 @@
             color: #0C0812;
             cursor: pointer;
             list-style: none;
-            transition: transform 0.2s;
             animation: slide-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
             animation-delay: calc(var(--i) * 80ms);
         }
@@ -115,7 +114,8 @@
         }
 
         .slat>summary:hover {
-            transform: translateX(10px);
+            outline: 2px solid #FF3EA5;
+            outline-offset: 3px;
         }
 
         @media (min-width: 768px) {
